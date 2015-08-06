@@ -447,18 +447,6 @@ Add a new step 9, before the existing step 9:
 <br/>
 <strong>Result</strong>: "int8x16"
 <br/>
-<strong>Type of val</strong>: Uint32x4
-<br/>
-<strong>Result</strong>: "uint32x4"
-<br/>
-<strong>Type of val</strong>: Uint16x8
-<br/>
-<strong>Result</strong>: "uint16x8"
-<br/>
-<strong>Type of val</strong>: Uint8x16
-<br/>
-<strong>Result</strong>: "uint8x16"
-<br/>
 <strong>Type of val</strong>: Bool32x4
 <br/>
 <strong>Result</strong>: "bool32x4"
@@ -478,7 +466,7 @@ Add a new step 9, before the existing step 9:
 <h1>The Addition operator ( + ) (<a href="http://www.ecma-international.org/ecma-262/6.0/#sec-addition-operator-plus">12.7.3</a>)</h1>
 <emu-clause id="addition-semantics">
 <h1>Runtime Semantics: Evaluation (<a href="http://www.ecma-international.org/ecma-262/6.0/#sec-addition-operator-plus">12.7.3.1</a>)</h1>
-<emu-note><p>No changes needed for SIMD. With one SIMD argument and one argument which is a String after ToPrimitive is applied, this will coerce the SIMD value to a string, giving a printed representation like `"SIMD.Float32x4(1, 2, 3, 4)"`. Otherwise, if either argument is a SIMD value, then ToNumber will be run on step 12. or 14., which would throw a TypeError.</p><p>It is important for `+` to throw when applied to SIMD types to allow the future definition of operator overloading on `+` .</p></emu-note>
+<emu-note><p>No changes needed for SIMD. With one SIMD argument and one argument which is a String after ToPrimitive is applied, this will coerce the SIMD value to a string, giving a printed representation like `"float32x4(1, 2, 3, 4)"`. Otherwise, if either argument is a SIMD value, then ToNumber will be run on step 12. or 14., which would throw a TypeError.</p><p>It is important for `+` to throw when applied to SIMD types to allow the future definition of operator overloading on `+` .</p></emu-note>
 </emu-clause>
 </emu-clause>
 
@@ -537,7 +525,7 @@ This internal algorithm creates a new value of the type corresponding to the spe
 <emu-note>The following algorithm uses splat arguments in the spec and indexes them as an array, but there isn't proper machinery in the spec to describe this behavior</emu-note>
 
 <emu-alg>
-1. If Length(fields) == _descriptor_.[[SIMDLength]], then throw a TypeError.
+1. If Length(fields) &ne; _descriptor_.[[SIMDLength]], then throw a TypeError.
 1. Let _list_ be a new List of length _descriptor_.[[SIMDLength]].
 1. For _i_ from 0 to _descriptor_.[[SIMDLength]],
   1. Let _n_ be <var>descriptor</var>.[[SIMDCastNumber]](fields[<var>i</var>]).
